@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Cloud, Droplets, Thermometer, Wind } from "lucide-react";
-import { cityList } from "./cityList"; // Import your city list here
+import { cityList } from "./cityList";
 
 interface WeatherData {
   city: string;
@@ -35,9 +35,8 @@ export default function WeatherApp() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Increase the transform range for a more intense movement
-  const rotateX = useTransform(y, [-300, 300], [20, -20]); // Increased to 20
-  const rotateY = useTransform(x, [-300, 300], [-20, 20]); // Increased to 20
+  const rotateX = useTransform(y, [-300, 300], [20, -20]);
+  const rotateY = useTransform(x, [-300, 300], [-20, 20]);
 
   const springConfig = { stiffness: 150, damping: 20 };
   const springX = useSpring(rotateX, springConfig);
@@ -88,7 +87,6 @@ export default function WeatherApp() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      // Calculate the values based on the mouse position relative to the center
       x.set(mouseX - centerX);
       y.set(mouseY - centerY);
     }
@@ -130,7 +128,7 @@ export default function WeatherApp() {
             onChange={handleCityChange}
           >
             <option value="">Select a city</option>
-            {cityList.map((city, index) => (
+            {cityList.map((city: string, index: number) => (
               <option key={index} value={city} className="text-gray-800">
                 {city}
               </option>
